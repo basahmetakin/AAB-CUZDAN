@@ -1,0 +1,17 @@
+AAB CÜZDAN - GITHUB PAGES KURULUMU
+
+1) Bu klasörün İÇİNDEKİ tüm dosyaları GitHub deposunun ana dizinine yükleyin.
+   ZIP dosyasını doğrudan yüklemeyin; önce ZIP'i açın.
+2) GitHub > Settings > Pages bölümünde:
+   - Source: Deploy from a branch
+   - Branch: main
+   - Folder: / (root)
+   - Save
+3) GitHub Pages adresi oluşunca HTTPS adresini Chrome'da açın.
+4) Chrome menüsü > Ana ekrana ekle / Uygulamayı yükle seçeneğini kullanın.
+
+VERİLER:
+Gelir, gider ve ödeme kayıtları tarayıcının bu siteye ait yerel depolamasında tutulur.
+Eski yerel HTML dosyasındaki kayıtlar yeni HTTPS adresine otomatik taşınmaz.
+Eski dosyadan JSON yedeği alın ve yeni uygulamada yedek içe aktar seçeneğiyle yükleyin.
+Düzenli olarak JSON yedeği indirin. Tarayıcı verilerini temizlemek kayıtları silebilir.

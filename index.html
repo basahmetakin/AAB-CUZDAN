@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17112f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AAB Cüzdan — Kişisel Finans</title>
+<style>
+:root{--bg:#100d20;--panel:#1b1730;--panel2:#241e3d;--text:#f7f4ff;--muted:#aaa2c4;--line:#393052;--accent:#a78bfa;--accent2:#ec4899;--green:#34d399;--red:#fb7185;--yellow:#fbbf24;--shadow:0 14px 38px #0004}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#38205c 0,transparent 32%),var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+body.light{--bg:#f3f4fb;--panel:#fff;--panel2:#f0edfa;--text:#201a35;--muted:#716b85;--line:#e4dfef;--accent:#7053d6;--accent2:#d94691;--shadow:0 12px 30px #28204412;background:var(--bg)}
+body.neon{--bg:#090b20;--panel:rgba(25,19,54,.92);--panel2:rgba(42,27,78,.92);--text:#fff;--muted:#c9b9f5;--line:rgba(185,91,255,.42);--accent:#ff3bd4;--accent2:#6d5cff;--green:#00ffd0;--red:#ff557d;--yellow:#ffe45e;background:radial-gradient(ellipse at 8% 5%,#671b83 0,transparent 34%),radial-gradient(ellipse at 92% 12%,#064d78 0,transparent 32%),radial-gradient(ellipse at 50% 95%,#4b126d 0,transparent 40%),#090b20;background-attachment:fixed}
+body.neon .card{box-shadow:0 0 0 1px #a855f733,0 10px 30px #0007,0 0 22px #8b5cf622}
+body.neon .hero{box-shadow:0 0 28px #ec489966,0 12px 34px #0006}
+body.neon button.primary{box-shadow:0 0 18px #ec489977}
+body.neon input:focus,body.neon select:focus{box-shadow:0 0 0 2px #ff3bd455,0 0 18px #8b5cf655}
+body.neon .item{box-shadow:inset 0 0 18px #a855f70b}
+body.neon .tabs button.active,body.neon .chips button.active{box-shadow:0 0 14px #ff3bd477}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:var(--panel2);color:var(--text);font-weight:650}button:hover{filter:brightness(1.12)}button.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));border:0;color:white}button.danger{color:var(--red)}button.small{padding:7px 9px;font-size:12px}
+input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);outline:none}input:focus,select:focus{border-color:var(--accent)}
+.wrap{max-width:760px;margin:auto;padding:22px 16px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{font-size:24px;font-weight:850;letter-spacing:-.7px}.brand span{color:var(--accent)}.sub{color:var(--muted);font-size:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}.hero{background:linear-gradient(120deg,#7652d5,#d94691);border:0;color:#fff;padding:22px}.hero .value{font-size:clamp(28px,7vw,38px);font-weight:850;margin-top:5px}.muted{color:var(--muted)}.hero .muted{color:#f4eaff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.stat{padding:15px}.stat .n{font-size:19px;font-weight:800;margin-top:6px;overflow-wrap:anywhere}.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}h2{font-size:17px;margin:25px 2px 10px}h3{font-size:15px;margin:0 0 12px}.form{display:grid;gap:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tabs,.chips{display:flex;gap:7px;flex-wrap:wrap}.tabs{background:var(--bg);padding:5px;border-radius:13px}.tabs button{flex:1;background:transparent;border:0}.tabs button.active,.chips button.active{background:var(--accent);color:#fff}.chips button{font-size:12px;border-radius:30px;padding:8px 11px}.list{display:grid;gap:9px}.item{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.itemmain{flex:1;min-width:0}.itemmain strong{display:block;overflow-wrap:anywhere}.itemmain small{color:var(--muted);font-size:12px}.amount{font-weight:800;white-space:nowrap}.actions{display:flex;gap:5px}.empty{text-align:center;color:var(--muted);padding:22px 8px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.section-head button{font-size:12px}.pill{display:inline-block;padding:4px 8px;border-radius:30px;font-size:11px;font-weight:750;margin-top:5px}.pill.late{background:#fb718522;color:var(--red)}.pill.soon{background:#fbbf2422;color:var(--yellow)}.pill.done{background:#34d39922;color:var(--green)}.archive-month{border:1px solid var(--line);border-radius:13px;overflow:hidden}.archive-month summary{padding:13px;cursor:pointer;font-weight:700;background:var(--panel2)}.archive-content{padding:12px}
+.section-accordion{border:1px solid var(--line);border-radius:13px;overflow:hidden;margin:12px 0;background:var(--panel)}
+.section-accordion>summary{padding:14px 15px;cursor:pointer;font-weight:750;background:var(--panel2);list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.section-accordion>summary::-webkit-details-marker{display:none}
+.section-accordion>summary::after{content:"＋";font-size:18px;color:var(--accent)}
+.section-accordion[open]>summary::after{content:"−"}
+.section-accordion>.card{margin:0;border:0;border-radius:0;box-shadow:none}
+.hidden{display:none!important}.footer{color:var(--muted);font-size:11px;text-align:center;margin-top:25px}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#211b35;color:white;border:1px solid #5b4b80;padding:11px 17px;border-radius:30px;transition:.25s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:430px){.wrap{padding:16px 12px 40px}.brand{font-size:21px}.grid3 .stat{padding:11px}.grid3 .n{font-size:14px}.item{gap:7px;padding:10px}.actions{flex-direction:column}.amount{font-size:13px}}
+@media print{body{background:white!important;color:#111!important}.wrap{max-width:none;padding:0}.card,.item,.archive-month{background:white!important;color:#111!important;box-shadow:none;border-color:#ccc}.muted,.itemmain small{color:#555!important}button,form,.actions,.top .tools,.footer{display:none!important}h2{break-after:avoid}}
+</style>
+</head>
+<body class="neon">
+<div class="wrap">
+<header class="top">
+ <div><div class="brand">👛 AAB <span>Cüzdan</span></div><div class="sub">Kişisel finansını tek yerden yönet</div></div>
+ <div class="tools"><button class="small" onclick="cycleTheme()">🎨 Tema</button></div>
+</header>
+
+<section class="card hero">
+ <div class="muted">Bu Ay Net Bakiye</div><div class="value" id="balance">0 ₺</div>
+ <div class="sub" id="monthLabel" style="color:#f4eaff"></div>
+</section>
+<div class="grid">
+ <section class="card stat"><div class="muted">Bu Ay Gelir</div><div class="n green" id="incomeTotal">+0 ₺</div></section>
+ <section class="card stat"><div class="muted">Bu Ay Gider</div><div class="n red" id="expenseTotal">−0 ₺</div></section>
+</div>
+<section class="card section-head"><div><div class="muted">💵 Bu Ay Toplam Bahşiş</div><div class="n green" id="tipTotal">0 ₺</div></div><div style="font-size:27px">💰</div></section>
+
+<details class="section-accordion">
+ <summary>⚡ Yeni işlem</summary>
+ <form class="card form" id="entryForm">
+ <div class="tabs"><button type="button" id="expenseTab" class="active" onclick="setType('gider')">Gider</button><button type="button" id="incomeTab" onclick="setType('gelir')">Gelir</button></div>
+ <input id="entryAmount" type="number" min="0.01" step="0.01" placeholder="Tutar (₺)" required>
+ <input id="entryDesc" maxlength="90" placeholder="Açıklama">
+ <div class="chips" id="categories"></div>
+ <button class="primary" type="submit">＋ İşlemi Kaydet</button>
+</form>
+</details>
+
+<details class="section-accordion">
+ <summary>💳 İşlemler</summary>
+ <section class="card">
+ <div class="section-head"><strong>İşlem geçmişi</strong><span class="muted" id="entryCount"></span></div>
+ <div class="tabs" style="margin:12px 0"><button class="active" data-filter="tumu" onclick="setFilter('tumu')">Tümü</button><button data-filter="gelir" onclick="setFilter('gelir')">Gelir</button><button data-filter="gider" onclick="setFilter('gider')">Gider</button></div>
+ <div id="entriesList" class="list"></div>
+ </section>
+</details>
+
+<details class="section-accordion">
+ <summary>🗂️ Aylık arşiv</summary>
+ <section class="card"><div id="archiveList" class="list"></div></section>
+</details>
+
+<h2>🔔 Fatura ve ödeme takibi</h2>
+<section class="card hero" style="background:linear-gradient(120deg,#059669,#0d9488)">
+ <div class="muted">Ödenmemiş toplam</div><div class="value" id="unpaidTotal">0 ₺</div>
+</section>
+<div class="grid3">
+ <section class="card stat"><div class="muted" style="font-size:11px">Vadesi geçmiş</div><div class="n red" id="overdueTotal">0 ₺</div></section>
+ <section class="card stat"><div class="muted" style="font-size:11px">5 gün içinde</div><div class="n yellow" id="soonTotal">0 ₺</div></section>
+ <section class="card stat"><div class="muted" style="font-size:11px">Diğer</div><div class="n green" id="futureTotal">0 ₺</div></section>
+</div>
+<details class="section-accordion">
+ <summary>📅 Planlanan ödemeler <span class="muted" id="dueCount"></span></summary>
+ <section class="card">
+ <div class="section-head"><strong>Ödeme listesi</strong></div>
+ <button type="button" class="primary" id="dueFormToggle" aria-expanded="false" onclick="toggleDueForm()" style="margin-top:12px">＋ Yeni ödeme planı ekle</button>
+ <form class="form hidden" id="dueForm" style="margin-top:12px">
+  <div class="row"><select id="dueType"><option>🛍️ Alışveriş</option><option>🧾 Fatura</option><option>📺 İçerik Platformu</option><option>💳 Kredi/Borç</option></select><input id="dueName" placeholder="Ödeme adı" required></div>
+  <div class="row"><input id="dueAmount" type="number" min="0.01" step="0.01" placeholder="Tutar (₺)" required><input id="dueDate" type="date" required></div>
+  <button class="primary">＋ Kaydet</button>
+ </form>
+ <div id="dueList" class="list" style="margin-top:12px"></div>
+ </section>
+</details>
+
+<h2>🛠️ Veri yönetimi</h2>
+<section class="card form">
+ <div class="row"><button onclick="exportData()">⬆️ Yedeği indir</button><button onclick="document.getElementById('importFile').click()">⬇️ Yedek yükle</button></div>
+ <input id="importFile" type="file" accept=".json,application/json" class="hidden" onchange="importData(event)">
+ <button onclick="window.print()">📄 Rapor yazdır / PDF kaydet</button>
+ <button class="danger" onclick="clearAll()">Tüm verileri temizle</button>
+ <div class="sub">Veriler bu cihazın tarayıcısında saklanır. Düzenli olarak yedek indirmen önerilir.</div>
+</section>
+<div class="footer">AAB Cüzdan • Veriler cihazında saklanır</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='aab_wallet_rebuilt_v1';
+const cats={gider:['🍔 Yemek','🛒 Market','🚌 Ulaşım','🧾 Fatura','🎮 Eğlence','💊 Sağlık','🏠 Kira','✨ Diğer'],gelir:['💵 Bahşiş','💼 Maaş','📈 Yatırım','✨ Diğer']};
+let state={entries:[],dues:[],theme:'neon'};
+let entryType='gider',selectedCat=cats.gider[0],entryFilter='tumu';
+const $=id=>document.getElementById(id);
+function localDate(d=new Date()){const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
+function money(v){return new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:2}).format(Number(v)||0)}
+function monthNow(){return localDate().slice(0,7)}
+
+
+function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function persistState(){
+ const raw=JSON.stringify(state);
+ try{
+  localStorage.setItem(KEY+'_backup',raw);
+  localStorage.setItem(KEY,raw);
+  return true;
+ }catch(e){
+  toast('Tarayıcı kaydı engellendi. Yedeği indirip Chrome’da aç.');
+  return false;
+ }
+}
+function save(){persistState();render()}
+function load(){
+ try{
+  let raw=localStorage.getItem(KEY);
+  // Ana kayıt bulunamazsa son sağlam yedek kaydı dene.
+  if(!raw) raw=localStorage.getItem(KEY+'_backup');
+  // Önceki AAB Cüzdan sürümündeki kayıtları da tanı.
+  if(!raw) raw=localStorage.getItem('aab_wallet_state');
+  if(raw){
+   const d=JSON.parse(raw);
+   state={...state,...d};
+   if(!Array.isArray(state.entries))state.entries=[];
+   if(!Array.isArray(state.dues))state.dues=[];
+   state.entries.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+   state.dues.sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+   persistState();
+  }
+  // Chrome destekliyorsa depolama alanının otomatik temizlenmesini önlemeyi iste.
+  if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
+ }catch(e){toast('Kayıt okunamadı. JSON yedeğini kontrol et.')}
+ applyTheme();renderCategories();render()
+}
+function applyTheme(){document.body.className=state.theme||'neon'}
+function cycleTheme(){
+ state.theme=state.theme==='neon'?'light':state.theme==='light'?'dark':'neon';
+ applyTheme();persistState();
+ toast(state.theme==='neon'?'Neon tema açık':state.theme==='light'?'Aydınlık tema açık':'Koyu tema açık')
+}
+function setType(t){entryType=t;selectedCat=cats[t][0];$('expenseTab').classList.toggle('active',t==='gider');$('incomeTab').classList.toggle('active',t==='gelir');renderCategories()}
+function renderCategories(){$('categories').innerHTML=cats[entryType].map((c,i)=>`<button type="button" class="${i===0?'active':''}" onclick="chooseCat('${safe(c)}',this)">${c}</button>`).join('')}
+function chooseCat(c,b){selectedCat=c;document.querySelectorAll('#categories button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+$('entryForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('entryAmount').value);if(!(amount>0))return;state.entries.push({id:crypto.randomUUID?.()||String(Date.now()),type:entryType,amount,desc:$('entryDesc').value.trim()||selectedCat,cat:selectedCat,date:localDate()});state.entries.sort((a,b)=>b.date.localeCompare(a.date));save();e.target.reset();toast('İşlem kaydedildi')});
+function setFilter(f){entryFilter=f;document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));renderEntries()}
+function removeEntry(id){if(!confirm('Bu işlem silinsin mi?'))return;state.entries=state.entries.filter(x=>x.id!==id);save();toast('İşlem silindi')}
+function renderEntries(){const m=monthNow();let a=state.entries.filter(x=>x.date?.startsWith(m));if(entryFilter!=='tumu')a=a.filter(x=>x.type===entryFilter);a.sort((x,y)=>y.date.localeCompare(x.date));$('entryCount').textContent=`${a.length} kayıt`;$('entriesList').innerHTML=a.length?a.map(x=>`<div class="item"><div class="itemmain"><strong>${safe(x.desc)}</strong><small>${safe(x.cat)} • ${safe(x.date)}</small></div><div class="amount ${x.type==='gelir'?'green':'red'}">${x.type==='gelir'?'+':'−'}${money(x.amount)}</div><button class="small danger" aria-label="Sil" onclick="removeEntry('${safe(x.id)}')">✕</button></div>`).join(''):'<div class="empty">Bu ay için işlem bulunamadı.</div>'}
+function renderSummary(){const a=state.entries.filter(x=>x.date?.startsWith(monthNow()));const inc=a.filter(x=>x.type==='gelir').reduce((s,x)=>s+Number(x.amount),0);const out=a.filter(x=>x.type==='gider').reduce((s,x)=>s+Number(x.amount),0);const tips=a.filter(x=>x.type==='gelir'&&(x.cat==='💵 Bahşiş'||x.cat==='Bahşiş')).reduce((s,x)=>s+Number(x.amount),0);$('balance').textContent=money(inc-out);$('incomeTotal').textContent='+'+money(inc);$('expenseTotal').textContent='−'+money(out);$('tipTotal').textContent=money(tips);$('monthLabel').textContent=new Date().toLocaleDateString('tr-TR',{month:'long',year:'numeric'})}
+function renderArchive(){const map={};state.entries.forEach(x=>{const m=(x.date||'').slice(0,7)||'Tarihsiz';map[m]??={in:0,out:0,tips:0,count:0};if(x.type==='gelir'){map[m].in+=Number(x.amount);if(x.cat==='💵 Bahşiş'||x.cat==='Bahşiş')map[m].tips+=Number(x.amount)}else map[m].out+=Number(x.amount);map[m].count++});const keys=Object.keys(map).sort((a,b)=>b.localeCompare(a));$('archiveList').innerHTML=keys.length?keys.map(m=>{const d=map[m],net=d.in-d.out;let label=m;if(m!=='Tarihsiz'){const [y,mo]=m.split('-');label=new Date(Number(y),Number(mo)-1,1).toLocaleDateString('tr-TR',{month:'long',year:'numeric'})}return `<details class="archive-month"><summary>${safe(label)} · ${d.count} işlem</summary><div class="archive-content grid"><div>Gelir<br><b class="green">+${money(d.in)}</b></div><div>Gider<br><b class="red">−${money(d.out)}</b></div><div>Bahşiş<br><b class="green">${money(d.tips)}</b></div><div>Net<br><b class="${net>=0?'green':'red'}">${money(net)}</b></div></div></details>`}).join(''):'<div class="empty">Henüz arşiv kaydı yok.</div>'}
+$('dueForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('dueAmount').value),date=$('dueDate').value;if(!(amount>0)||!date)return;state.dues.push({id:crypto.randomUUID?.()||String(Date.now()),name:$('dueName').value.trim(),type:$('dueType').value,amount,date,paid:false});state.dues.sort((a,b)=>a.date.localeCompare(b.date));save();e.target.reset();$('dueForm').classList.add('hidden');$('dueFormToggle').setAttribute('aria-expanded','false');$('dueFormToggle').textContent='＋ Yeni ödeme planı ekle';toast('Ödeme planı eklendi')});
+function editDue(id){
+ const d=state.dues.find(x=>x.id===id);if(!d)return;
+ const name=prompt('Ödeme adı:',d.name);if(name===null)return;
+ const amountText=prompt('Tutar (₺):',String(d.amount));if(amountText===null)return;
+ const date=prompt('Ödeme tarihi (YYYY-AA-GG):',d.date);if(date===null)return;
+ const type=prompt('Ödeme türü:',d.type);if(type===null)return;
+ const amount=Number(amountText);
+ if(!name.trim()||!(amount>0)||!/^\\d{4}-\\d{2}-\\d{2}$/.test(date)||Number.isNaN(Date.parse(date))||!type.trim()){
+  alert('Lütfen geçerli bir ad, tutar, tarih ve ödeme türü girin.');return;
+ }
+ d.name=name.trim();d.amount=amount;d.date=date;d.type=type.trim();
+ state.dues.sort((a,b)=>(a.date||'').localeCompare(b.date||''));save();toast('Ödeme planı güncellendi');
+}
+function toggleDueForm(){
+ const form=$('dueForm'),btn=$('dueFormToggle'),opening=form.classList.contains('hidden');
+ form.classList.toggle('hidden',!opening);
+ btn.setAttribute('aria-expanded',String(opening));
+ btn.textContent=opening?'✕ Formu kapat':'＋ Yeni ödeme planı ekle';
+}
+function togglePaid(id){
+ const d=state.dues.find(x=>x.id===id);if(!d)return;
+ if(!d.paid){
+  d.paid=true;
+  // Ödeme tamamlandığında gider işlemi oluştur; linkedDueId yinelenen kayıtları önler.
+  if(!state.entries.some(x=>x.linkedDueId===d.id)){
+   state.entries.push({id:crypto.randomUUID?.()||String(Date.now()),type:'gider',amount:Number(d.amount),desc:d.name,cat:d.type,date:localDate(),linkedDueId:d.id});
+  }
+ }else{
+  d.paid=false;
+  // Ödeme geri alındığında yalnızca bu ödeme planından oluşan gideri kaldır.
+  state.entries=state.entries.filter(x=>x.linkedDueId!==d.id);
+ }
+ state.entries.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+ save();toast(d.paid?'Ödeme gider listesine eklendi':'Ödeme geri alındı; gider kaydı kaldırıldı');
+}
+function removeDue(id){if(!confirm('Bu ödeme kaydı silinsin mi?'))return;state.dues=state.dues.filter(x=>x.id!==id);save()}
+function renderDues(){
+ const today=localDate(),currentMonth=monthNow(),soon=new Date();soon.setDate(soon.getDate()+5);const soonStr=localDate(soon);
+ let unpaid=0,late=0,near=0,future=0;
+ const all=[...state.dues].sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+ // Geçmiş aya ait ödenmiş planları gizle; ödenmemiş eski planları devret ve görünür tut.
+ const arr=all.filter(d=>!d.paid||(d.date||'').slice(0,7)>=currentMonth);
+ arr.forEach(d=>{if(!d.paid){unpaid+=Number(d.amount);if(d.date<today)late+=Number(d.amount);else if(d.date<=soonStr)near+=Number(d.amount);else future+=Number(d.amount)}});
+ $('unpaidTotal').textContent=money(unpaid);$('overdueTotal').textContent=money(late);$('soonTotal').textContent=money(near);$('futureTotal').textContent=money(future);
+ $('dueCount').textContent=`${arr.length} kayıt`;
+ $('dueList').innerHTML=arr.length?arr.map(d=>{
+  const status=d.paid?'<span class="pill done">Ödendi</span>':d.date<today?'<span class="pill late">Vadesi geçti • Devredildi</span>':d.date<=soonStr?'<span class="pill soon">Yaklaşıyor</span>':'<span class="pill done">İleri tarih</span>';
+  return `<div class="item"><div class="itemmain"><strong>${safe(d.name)}</strong><small>${safe(d.type)} • ${safe(d.date)}</small><br>${status}</div><div class="amount">${money(d.amount)}</div><div class="actions"><button class="small" onclick="editDue('${safe(d.id)}')">✏️ Düzenle</button><button class="small" onclick="togglePaid('${safe(d.id)}')">${d.paid?'Geri al':'Ödendi'}</button><button class="small danger" onclick="removeDue('${safe(d.id)}')">✕</button></div></div>`
+ }).join(''):'<div class="empty">Görüntülenecek ödeme planı yok.</div>';
+}
+function render(){renderSummary();renderEntries();renderArchive();renderDues()}
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`aab-cuzdan-yedek-${localDate()}.json`;a.click();URL.revokeObjectURL(url);toast('Yedek indirildi')}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.entries)||!Array.isArray(d.dues))throw Error();if(!confirm('Mevcut veriler içe aktarılacak dosyadaki verilerle değiştirilsin mi?'))return;state={entries:d.entries,dues:d.dues,theme:d.theme||'neon'};save();applyTheme();toast('Yedek yüklendi')}catch(err){alert('Dosya geçerli bir AAB Cüzdan yedeği değil.')}e.target.value=''};r.readAsText(f)}
+function clearAll(){if(!confirm('Tüm gelir, gider ve ödeme kayıtları kalıcı olarak silinsin mi? Önce yedek almanı öneririz.'))return;state.entries=[];state.dues=[];save();toast('Tüm kayıtlar temizlendi')}
+load();
+</script>
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker kaydı başarısız:', err)));
+}
+</script>
+</body>
+</html>
